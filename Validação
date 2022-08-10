@@ -1,0 +1,130 @@
+
+
+import java.util.Scanner;
+
+public class DigitoVerificardor_12022122095_LucasVenicioAngelimOlegario {
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+
+        int infinito = 0;
+        int infinito2 = 0;
+        int opcao;
+        String cpf = "";
+        while (infinito == 0) {
+            System.out.print("Digite os 9 primeiros digitos do seu CPF:");
+            cpf = input.nextLine();
+            boolean cpfALPHA = cpf.matches("[0-9]+");
+
+            if (cpf.length() != 9 || !cpfALPHA) {
+                System.out.println("ERRO!\nO CPF digitado contem quantidade de números incorretos e/ou letras.\nTente novamente.\n");
+
+
+            } else {
+
+                System.out.println("CPF digitado com sucesso!");
+                break;
+
+
+            }
+        }
+        while (infinito2 == 0) {
+            System.out.println("|-------------------|: MENU :|-------------------|");
+            System.out.println("");
+            System.out.println("1. Verificar o dígito verificador do CPF");
+            System.out.println("2. Informações do desenvolvedor");
+            System.out.println("3. Sair do algoritmo");
+            System.out.println();
+            System.out.println("Qual opção você deseja?");
+            opcao = input.nextInt();
+            if (opcao == 1) {
+
+
+                char[] cpfArray = cpf.toCharArray();
+
+                int p1 = Integer.parseInt(new String(String.valueOf(cpfArray[0])));
+                int p2 = Integer.parseInt(new String(String.valueOf(cpfArray[1])));
+                int p3 = Integer.parseInt(new String(String.valueOf(cpfArray[2])));
+                int p4 = Integer.parseInt(new String(String.valueOf(cpfArray[3])));
+                int p5 = Integer.parseInt(new String(String.valueOf(cpfArray[4])));
+                int p6 = Integer.parseInt(new String(String.valueOf(cpfArray[5])));
+                int p7 = Integer.parseInt(new String(String.valueOf(cpfArray[6])));
+                int p8 = Integer.parseInt(new String(String.valueOf(cpfArray[7])));
+                int p9 = Integer.parseInt(new String(String.valueOf(cpfArray[8])));
+
+                /*ETAPA1*/
+                int dv1;
+
+                int somaDosProdutosDV1 = (p1 * 10) + (p2 * 9) + (p3 * 8) + (p4 * 7) + (p5 * 6) + (p6 * 5) + (p7 * 4) + (p8 * 3) + (p9 * 2);
+                int modDV1 = (somaDosProdutosDV1 * 10) % 11;
+                if (modDV1 == 10) {
+                    dv1 = 0;
+
+                } else {
+                    dv1 = modDV1;
+
+                }
+
+
+
+                /*ETAPA2*/
+
+                int dv2;
+                int somaDosProdutosDV2 = (p1 * 11) + (p2 * 10) + (p3 * 9) + (p4 * 8) + (p5 * 7) + (p6 * 6) + (p7 * 5) + (p8 * 4) + (p9 * 3);
+                dv2 = (somaDosProdutosDV2 + (dv1 * 2)) * 10;
+                int modDV2 = dv2 % 11;
+                if (modDV2 == 10) {
+                    dv2 = 0;
+                } else {
+                    dv2 = modDV2;
+                }
+
+
+                /*ETAPA3*/
+                int dv3 = dv1 * 10 + dv2;
+                cpf = cpf + dv3;
+
+                String bloco1 = cpf.substring(0, 3);
+                String bloco2 = cpf.substring(3, 6);
+                String bloco3 = cpf.substring(6, 9);
+                String bloco4 = cpf.substring(9, 11);
+                cpf = bloco1 + "." + bloco2 + "." + bloco3 + "-" + bloco4;
+                System.out.println("CPF: " + cpf);
+                System.out.println("O número de segurança é " + dv3);
+                cpf = String.valueOf(cpfArray);
+
+
+            }
+
+            if (opcao == 2) {
+                System.out.println("Nome do Aluno -> Lucas Venicio Angelim Olegario");
+                System.out.println("Matricula -> 1-2022122095");
+            }
+
+            if (opcao == 3) {
+                System.out.println("Progama Encerrado.");
+                break;
+            }
+        }
+    }
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
